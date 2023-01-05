@@ -10,7 +10,6 @@
       <button id="button">Generate Output</button>
     </div>
     <div id="output"></div>
-    <div id="demo"></div>
     <script src="https://huggingface.co/transformers/main-api.js"></script>
     <script>
       // Import API key
@@ -25,7 +24,6 @@
 
       // Wait for the model and tokenizer to be ready
       Promise.all([model.ready(), tokenizer.ready()]).then(function() {
-        document.getElementById("demo").innerHTML = "Ready"
         console.log("Model and tokenizer are ready!");
 
         // Get a reference to the button and input field
@@ -47,7 +45,6 @@
           // Send the input to the model and receive the model's prediction as output
           model.predict(inputTokens).then(function(output) {
             console.log("Model prediction:", output);
-            document.getElementById("demo").innerHTML = "output generated"
             // Decode the output tokens and create a text node containing the output text
             const outputText = tokenizer.decode(output, skipSpecialTokens=true);
             const textNode = document.createTextNode(outputText);
