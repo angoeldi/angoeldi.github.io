@@ -16,6 +16,9 @@
     <script src="https://github.com/angoeldi/angoeldi.github.io/blob/c752dba36a7301cfdd8677cd2b5dc6fdfd223fdb/secret.js"></script>
     <script>
       // Import API key
+      require(['foo'], function (foo) {
+      //foo is now loaded.
+      
       const apiKey = require("./secret.js");
     
       // Set your API key
@@ -58,6 +61,7 @@
           });
         });
       });
+    });
     </script>
   </body>
 </html>
