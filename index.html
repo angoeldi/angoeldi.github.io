@@ -12,14 +12,28 @@
     </div>
     <div id="output"></div>
     <script src="https://huggingface.co/transformers/main-api.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://github.com/angoeldi/angoeldi.github.io/blob/c752dba36a7301cfdd8677cd2b5dc6fdfd223fdb/secret.js"></script>
     <script>
-      // Import API key
-      require(['foo'], function (foo) {
-      //foo is now loaded.
       
-      const apiKey = require("./secret.js");
+      fetch('./secret.txt')
+        .then(
+          function(response) {
+            if (response.status !== 200) {
+              console.log('Secret was not loaded. Status Code: ' +
+                response.status);
+              return;
+            }
+
+            response.text().then(function(data) {
+              console.log(data);
+              const apiKey = response.text();
+            });
+          }
+        )
+        .catch(function(err) {
+          console.log('Fetch Error :-S', err);
+        });
+      
+      
     
       // Set your API key
       transformers.apiKey = apiKey;
