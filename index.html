@@ -12,31 +12,9 @@
     </div>
     <div id="output"></div>
     <script src="https://huggingface.co/transformers/main-api.js"></script>
-    <script>
-      
-      fetch('./secret.txt')
-        .then(
-          function(response) {
-            if (response.status !== 200) {
-              console.log('Secret was not loaded. Status Code: ' +
-                response.status);
-              return;
-            }
-
-            response.text().then(function(data) {
-              console.log(data);
-              const apiKey = response.text();
-            });
-          }
-        )
-        .catch(function(err) {
-          console.log('Fetch Error :-S', err);
-        });
-      
-      
-    
+    <script> 
       // Set your API key
-      transformers.apiKey = apiKey;
+      transformers.apiKey = "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";
 
       // Load the model and tokenizer
       const model = new transformers.TFSeq2SeqModel("microsoft/GODEL-v1_1-large-seq2seq");
