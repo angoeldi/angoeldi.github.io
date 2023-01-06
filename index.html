@@ -11,10 +11,11 @@
       <button id="button">Generate Output</button>
     </div>
     <div id="output"></div>
+    <script src="secret.js"></script>
     <script src="https://huggingface.co/transformers/main-api.js"></script>
-    <script> 
-      // Set your API key
-      transformers.apiKey = "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";
+    <script>
+      // Get the API key from the api-key.js file
+      const apiKey = require("./secret.js");
 
       // Load the model and tokenizer
       const model = new transformers.TFSeq2SeqModel("microsoft/GODEL-v1_1-large-seq2seq");
