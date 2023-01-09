@@ -20,7 +20,7 @@
       const response = await fetch(
         "https://api-inference.huggingface.co/models/microsoft/GODEL-v1_1-large-seq2seq",
           {
-            headers: { Authorization: `Bearer ${"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"}` },
+            headers: { Authorization: `Bearer ${secret}` },
             method: "POST",
             body: JSON.stringify(data),
           }
