@@ -11,10 +11,9 @@
       <button id="button">Generate Output</button>
     </div>
     <div id="output"></div>
-    <script src="https://unpkg.com/node-fetch@4.0.0-beta.4/src/index.js"></script>
     <script src="secret.js"></script>
     <script src="https://huggingface.co/transformers/main-api.js"></script>
-    <script>
+    <script type="module" scr="https://unpkg.com/node-fetch@4.0.0-beta.4/src/index.js">
       import fetch from "node-fetch";
       async function query(data) {
       const response = await fetch(
