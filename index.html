@@ -24,6 +24,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://github.com/angoeldi/angoeldi.github.io/blob/c752dba36a7301cfdd8677cd2b5dc6fdfd223fdb/secret.js"></script>
     <script>
+      // Located somewhere on https://your-site.com
+      import * as BypassCors from corsBypass
+
+      const client = new BypassCors.Client()
+
+      await client.getServer() // null - no server connected yet
+      await client.openServerInNewTab({
+        serverUrl: 'http://angoeldi.github.io/cors-bypass.html',
+        adapterUrl: 'http://angoeldi.github.io/index.html'
+      })
+      await client.getServer() // { id: 123, url: 'http://random-domain.com/server.html' }
+
+      // Create a WebSocket (websocket is loaded in the server tab, but it's API is available on this page)
+      const ws = new BypassCors.WebSocket('ws://echo.websocket.org') // change?
+      ws.onopen = () => ws.send('hello')
+      ws.onmessage = ({ data }) => console.log('received', data)
+      
       // Import API key
       const apiKey = require("./secret.js");
     
