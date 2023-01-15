@@ -1,6 +1,75 @@
 <html>
   <head>
+    <title>My HTML File</title><html>
+  <head>
     <title>My HTML File</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h1>Welcome to my HTML file!</h1>
+    <div>
+      <label for="input">Input:</label>
+      <input type="text" id="input" name="input">
+      <button id="button">Generate Output</button>
+    </div>
+    <div id="output"></div>
+    <script src="https://huggingface.co/transformers/main-api.js"></script>
+    <script type="module">
+      import corsBypass from 'https://cdn.skypack.dev/cors-bypass';
+    </script>$
+    <body>
+      <script src="./node_modules/cors-bypass/lib/server.bundle.js"></script>
+    </body>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://github.com/angoeldi/angoeldi.github.io/blob/c752dba36a7301cfdd8677cd2b5dc6fdfd223fdb/secret.js"></script>
+    <script>
+      // Import API key
+      const apiKey = require("./secret.js");
+    
+      // Set your API key
+      transformers.apiKey = apiKey;
+
+      // Load the model and tokenizer
+      const model = new transformers.TFSeq2SeqModel("microsoft/GODEL-v1_1-large-seq2seq");
+      const tokenizer = new transformers.HFTokenizer("microsoft/GODEL-v1_1-large-seq2seq");
+
+      // Wait for the model and tokenizer to be ready
+      Promise.all([model.ready(), tokenizer.ready()]).then(function() {
+        console.log("Model and tokenizer are ready!");
+
+        // Get a reference to the button and input field
+        const button = document.getElementById("button");
+        const inputField = document.getElementById("input");
+
+        // Define the context (instruction, knowledge, and dialogue history)
+        const context = "Please give me some information about yourself.";
+
+        // Add an event listener to the button to handle clicks
+        button.addEventListener("click", function() {
+          // Get the input text from the input field
+          const inputText = inputField.value;
+
+          // Tokenize the input text and context
+          const inputTokens = tokenizer.encode(inputText, context);
+
+          document.getElementById("demo").innerHTML = "Tokenized"
+          // Send the input to the model and receive the model's prediction as output
+          model.predict(inputTokens).then(function(output) {
+            console.log("Model prediction:", output);
+            // Decode the output tokens and create a text node containing the output text
+            const outputText = tokenizer.decode(output, skipSpecialTokens=true);
+            const textNode = document.createTextNode(outputText);
+
+            // Add the text node to the output element in the HTML document
+            const outputElement = document.getElementById("output");
+            outputElement.appendChild(textNode);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
